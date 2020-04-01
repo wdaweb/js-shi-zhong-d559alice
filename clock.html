@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            background-color: rgb(100, 180, 160);
+        }
+
+        #clock {
+            width: 300px;
+            height: 300px;
+            background-color: rgb(100, 180, 160);
+            border-radius: 50%;
+            margin: 100px auto;
+            position: relative;
+        }
+
+        section {
+            position: absolute;
+            width: 6px;
+            height: 150px;
+            /* background-color: white; */
+            top: 0%;
+            left: calc(50% - 3px);
+            transform: rotate(0deg);
+            transform-origin: bottom center;
+            text-align: center;
+        }
+
+        h1 {
+            position: absolute;
+            width: 6px;
+            height: 30px;
+            /* border-radius: 50%; */
+            background-color: rgb(198, 235, 238);
+            /* left: 1px; */
+            /* top: 10px; */
+            margin: 0;
+            padding: 0;
+        }
+
+        span {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background-color: rgb(198, 235, 238);
+            left: 1px;
+            top: 10px;
+        }
+
+        #circle {
+            width: 60px;
+            height: 60px;
+            background-color: white;
+            border-radius: 50%;
+            position: absolute;
+            top: calc(50% - 30px);
+            left: calc(50% - 30px);
+        }
+
+        #hour {
+            position: absolute;
+            width: 20%;
+            height: 6px;
+            background-color: red;
+            top: calc(50% - 3px);
+            border-radius: 2px;
+            /* 往左30%+寬度20% =圓心位置50%*/
+            left: 30%;
+            transform: rotate(0deg);
+            transform-origin: right center;
+        }
+
+        #minute {
+            position: absolute;
+            width: 45%;
+            height: 6px;
+            background-color: green;
+            /* calc(50% - 3px)，()內的+-前後都要有空白 */
+            top: calc(50% - 3px);
+            border-radius: 2px;
+            /* 往左30%+寬度20% =圓心位置50%*/
+            left: 5%;
+            transform: rotate(0deg);
+            transform-origin: right center;
+        }
+
+        #second {
+            position: absolute;
+            width: 48%;
+            height: 2px;
+            background-color: pink;
+            top: calc(50% - 1px);
+            border-radius: 1px;
+            /* 往左30%+寬度20% =圓心位置50%*/
+            left: 2%;
+            transform: rotate(0deg);
+            transform-origin: right center;
+        }
+
+        .text {
+            color: white;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            font-size: 40px;
+        }
+
+        #text12 {
+            width: 50px;
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+            position: absolute;
+            top: -50px;
+            border-radius: 2px;
+            /* 往左30%+寬度20% =圓心位置50%*/
+            left: calc(50% - 25px);
+        }
+
+        #text3 {
+            width: 50px;
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+            position: absolute;
+            top: calc(50% - 25px);
+            border-radius: 2px;
+            /* 往左30%+寬度20% =圓心位置50%*/
+            right: -50px;
+        }
+
+        #text6 {
+            width: 50px;
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+            position: absolute;
+            bottom: -50px;
+            border-radius: 2px;
+            /* 往左30%+寬度20% =圓心位置50%*/
+            left: calc(50% - 25px);
+        }
+
+        #text9 {
+            width: 50px;
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+            position: absolute;
+            top: calc(50% - 25px);
+            border-radius: 2px;
+            /* 往左30%+寬度20% =圓心位置50%*/
+            left: -50px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="clock">
+        <div id="circle"></div>
+        <div id="second"></div>
+        <div id="minute"></div>
+        <div id="hour"></div>
+
+        <div class="text">
+            <div id="text12">12</div>
+            <div id="text3">3</div>
+            <div id="text6">6</div>
+            <div id="text9">9</div>
+        </div>
+
+    </div>
+
+    <script>
+        const clock = document.getElementById("clock");
+        for (let i = 0; i < 60; i++) {
+            if (i % 5 == 0) {
+                const section = document.createElement("section");
+                clock.appendChild(section);
+                const h1 = document.createElement("h1");
+                section.appendChild(h1);
+                section.style.transform = `rotate(${i * 6}deg)`;
+            }
+            else {
+                const section = document.createElement("section");
+                clock.appendChild(section);
+                const span = document.createElement("span");
+                section.appendChild(span);
+                section.style.transform = `rotate(${i * 6}deg)`;
+            }
+
+        }
+
+        const hour = document.getElementById("hour");
+        const minute = document.getElementById("minute");
+        const second = document.getElementById("second");
+        const setDate = () => {
+            const now = new Date();
+            hour.style.transform = `rotate(${now.getHours() * 30 + 90}deg)`;
+            minute.style.transform = `rotate(${now.getMinutes() * 6 + 90}deg)`;
+            second.style.transform = `rotate(${now.getSeconds() * 6 + 90}deg)`;
+        }
+        setDate();
+        setInterval(setDate, 1000);
+
+    </script>
+
+
+</body>
+
+</html>
